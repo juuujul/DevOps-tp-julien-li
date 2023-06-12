@@ -23,4 +23,4 @@ jobs:
 
      #finally build your app with the latest command
       - name: Build and test with Maven
-        run: mvn clean verify --file ./backend/simple-api-student/pom.xmlls
+        run: mvn clean verify --file ../../backend/simple-api-student/pom.xmlls
