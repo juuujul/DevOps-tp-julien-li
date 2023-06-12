@@ -1,8 +1,9 @@
 name: CI devops 2023
 on:
-  #to begin you want to launch this job in main and develop
+  # to begin you want to launch this job in main and develop
   push:
     branches:
+      # the name of the branches
       - main
       - develop
   pull_request:
@@ -11,16 +12,18 @@ jobs:
   test-backend:
     runs-on: ubuntu-22.04
     steps:
-     #checkout your github code using actions/checkout@v2.5.0
+     # checkout your github code using actions/checkout@v2.5.0
       - uses: actions/checkout@v2.5.0
 
-     #do the same with another action (actions/setup-java@v3) that enable to setup jdk 17
+     # do the same with another action (actions/setup-java@v3) that enable to setup jdk 17
       - name: Set up JDK 17
+        # uses action/setup-java@v3 with the oracle distribution and the java-17 version
         uses: actions/setup-java@v3
         with:
           distribution: 'oracle'
           java-version: 17
 
-     #finally build your app with the latest command
+     # finally build your app with the latest command
       - name: Build and test with Maven
+        # to build my app
         run: mvn clean verify --file ./backend/simple-api-student/pom.xml
