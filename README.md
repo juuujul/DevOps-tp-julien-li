@@ -97,7 +97,7 @@ Cela permet à httpd de retrouver les pages html à utiliser dans le site web.
 Pour la configuration du server, j'ai d'abord récupéré la configuration par défaut grace à la commande suivante :
 ```
 docker exec /usr/local/apache2/conf/httpd.conf .
-``` 
+```
 
 J'ai ensuite ajouté la partie de code donnée dans le sujet du tp dans le fichier "my-httpd.conf" qui a été créé grâce à la commande ``docker exec``.
 Puis pour ajouter ces lignes dans la config du container, il suffit de la copier en ajoutant la ligne suivante dans le dockerfile :
