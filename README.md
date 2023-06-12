@@ -10,7 +10,7 @@ Je n'ai pas pu finir la partie publish et la partie Docker-compose n'est pas ter
 
 Le tp est donc divisé en 4 parties. Tout est contenue dans ce dossier, la partie database dans le dossier ./database, la partie backend dans le dossier ./backend, la partie http server dans le dossier ./httpserver et la partie docker compose dans le fichier ./docker-compose.yml .
 
-## Database
+## Database 
 Le contenu du Dockerfile est donné dans le sujet du tp. Pour construire une image et lancer le container proprement, voici les commandes à lancer en étant dans le dossier ./database:
 
 ``` 
