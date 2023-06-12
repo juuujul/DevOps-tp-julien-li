@@ -19,8 +19,8 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'oracle'
-          version: '17'
+          java-version: 17
 
      #finally build your app with the latest command
       - name: Build and test with Maven
-        run: mvn clean verify
+        run: mvn clean verify --file ./backend/simple-api-student/pom.xmlls
