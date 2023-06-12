@@ -1,4 +1,4 @@
-name: CI devops 2023 build and push docker image
+name: CI devops 2023 build and push database and http server
 on:
   # to begin you want to launch this job in main and develop
   push:
