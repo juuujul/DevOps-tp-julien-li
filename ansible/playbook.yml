@@ -1,0 +1,19 @@
+- hosts: all
+  gather_facts: false
+  become: yes
+  roles:
+    - role: docker
+      vars:
+        ansible_python_interpreter: /usr/bin/python
+    - role: network
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+    - role: database
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+    - role: httpserver
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+    - role: backend
+      vars:
+        ansible_python_interpreter: /usr/bin/python3

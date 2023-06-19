@@ -1,0 +1,24 @@
+---
+# tasks file for roles/database
+
+# Task to run the database
+- name: Run DATABASE
+  # Actions for the database container
+  docker_container:
+    # The name of the container
+    name: database
+    # The state
+    state: started
+    # The image in my docker-hub
+    image: juuuju/takima_database
+    pull: true
+    # The network
+    networks:
+      - name: app-network
+    # My environment variables
+    env:
+      POSTGRES_DB: db
+      POSTGRES_USER: usr
+      POSTGRES_PASSWORD: pwd
+    # The volumes
+    volumes: data_bis:/var/lib/postgresql/data

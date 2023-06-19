@@ -1,0 +1,17 @@
+---
+# tasks file for roles/backend
+
+# Task to run my app's backend
+- name: Run APP's Backend
+  # Actions for my backend's container
+  docker_container:
+    # The name of my container
+    name: simple-api-student
+    # The state
+    state: started
+    # The name of the image in my docker-hub
+    image: juuuju/takima_simple-api-student
+    pull: true
+    # My network
+    networks:
+      - name: app-network

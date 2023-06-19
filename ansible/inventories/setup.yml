@@ -1,0 +1,10 @@
+all:
+  vars:
+    # The name of the user
+    ansible_user: centos
+    # The ssh key
+    ansible_ssh_private_key_file: sshkey/id_rsa
+  children:
+    prod:
+      # My host name
+      hosts: julien_li2000.takima.cloud

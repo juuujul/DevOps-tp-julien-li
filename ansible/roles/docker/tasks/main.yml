@@ -1,0 +1,45 @@
+---
+# tasks file for roles/docker
+# The command to clean the packages
+- name: Clean packages
+  command:
+    cmd: yum clean -y packages
+
+# The yum commands to install the latest version of device-mapper-persistent-data
+- name: Install device-mapper-persistent-data
+  yum:
+    name: device-mapper-persistent-data
+    state: latest
+
+# The yum commands to install the latest version of lvm2
+- name: Install lvm2
+  yum:
+    name: lvm2
+    state: latest
+
+# The command to add the docker repository
+- name: add repo docker
+  command:
+    cmd: sudo yum-config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
+
+# The yum commands to install the present version of docker-ce
+- name: Install Docker
+  yum:
+    name: docker-ce
+    state: present
+
+# The yum commands to install python3
+- name: install python3
+  yum:
+    name: python3
+
+# The pip commands to install docker pip3
+- name: Pip install
+  pip:
+    name: docker
+    executable: pip3
+
+# The command to check if docker is running
+- name: Make sure Docker is running
+  service: name=docker state=started
+  tags: docker
