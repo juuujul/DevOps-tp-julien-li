@@ -1,13 +1,13 @@
 # TP1  Docker - Devops
 ## Contenue du tp
 Mon tp contient les parties suivantes :
-- [Database] (#database)
-- [Backend API] (#backend-api)
-- [Http server] (#http-server)
-- [Docker compose] (#docker-compose)
-- [Docker Hub] (#docker-hub)
-- [Github Actions] (#github-actions)
-- [Ansible] (#ansible)
+- [Database](#database)
+- [Backend API](#backend-api)
+- [Http server](#http-server)
+- [Docker compose](#docker-compose)
+- [Docker Hub](#docker-hub)
+- [Github Actions](#github-actions)
+- [Ansible](#ansible)
 
 ## Database
 Le contenu du Dockerfile est donné dans le sujet du tp. Pour construire une image et lancer le container proprement, voici les commandes à lancer en étant dans le dossier ./database:
@@ -46,7 +46,7 @@ docker run --network app-network --name database juuuju/database -v /my/own/data
 
 Le volume sert à persister les données pour ne pas les perdre au cas où le container de la database se ferme.
 
-## Backend API
+## Backend api
 
 #### Basics
 
