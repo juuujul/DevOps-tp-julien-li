@@ -1,16 +1,15 @@
 # TP1  Docker - Devops
 ## Contenue du tp
 Mon tp contient les parties suivantes :
-- Database
-- Backend API
-- Http server
-- Link application
+- [Database] (#database)
+- [Backend API] (#backend-api)
+- [Http server] (#http-server)
+- [Docker compose] (#docker-compose)
+- [Docker Hub] (#docker-hub)
+- [Github Actions] (#github-actions)
+- [Ansible] (#ansible)
 
-Je n'ai pas pu finir la partie publish et la partie Docker-compose n'est pas terminée non plus.
-
-Le tp est donc divisé en 4 parties. Tout est contenue dans ce dossier, la partie database dans le dossier ./database, la partie backend dans le dossier ./backend, la partie http server dans le dossier ./httpserver et la partie docker compose dans le fichier ./docker-compose.yml .
-
-## Database 
+## Database
 Le contenu du Dockerfile est donné dans le sujet du tp. Pour construire une image et lancer le container proprement, voici les commandes à lancer en étant dans le dossier ./database:
 
 ``` 
@@ -124,9 +123,70 @@ etc...
 
 Avec docker compose, tout est fait grâce à la ligne de commande la plus importante ``docker compose up``.
 
-## Setup Github Actions
-
+## Docker Hub
+Pour publier mes images docker sur Docker Hub j'ai exécuté les commandes suivantes :
 ```
-# Pour nettoyer les anciens builds et lancer les tests
+# Je me connecte à mon compte Docker Hub
+docker login
+
+# Entrer mes identifiants Docker Hub
+
+# Je créé un tag pour chaque image
+docker tag database juuuju/database:1.0
+docker tag simple-api-student juuuju/simple-api-student:1.0
+docker tag my-apache2 juuuju/my-apache2:1.0
+
+# Je pousse mes images sur mon Docker Hub grâce aux tags
+docker push juuuju/database
+docker push juuuju/simple-api-student
+docker push juuuju/my-apache2
+```
+
+Une fois publiée, j'ai pu voir mes images en me connectant sur le site de Docker Hub:
+![img_1.png](img_1.png)
+
+## Github Actions
+Github Actions nous permet de lancer des "pipelines" pour tester nos applications.
+Pour cela, nous disposons d'un fichier pom.xml (./backend/simple-api-student/pom.xml) qui est configuré avec des dépendances nous permettant de lancer des tests spécifiques.
+Voici la commande pour lancer une pipeline :
+```
+# Pour nettoyer les anciens builds et lancer les tests.
+# Je spécifie le chemin vers le pom.xml si je ne suis pas dans le même dossier.
 mvn clean verify --file ./backend/simple-api-student/pom.xml
 ```
+Notre pom.xml est configuré de telle sorte à lancer des tests unitaires (pour tester chaque fonction de notre code Java unitairement)
+et des tests d'intégration (pour tester si tous les composants Java s'intègrent bien dans le code).
+
+Comme vous pouvez le voir, notre pom.xml contient des testcontainers:
+![img_2.png](img_2.png)
+
+Les testcontainers sont des librairies Java open-source qui nous permettent de faire des tests d'intégration et qui nous permettent de lancer des containers lorsque les tests sont en train de se faire. 
+
+Pour ensuite pouvoir lancer une pipeline juste après un commit, il faut créer des fichiers de configuration (se trouvant dans ./.github/workflows)
+Il est important d'y insérer des variables sécurisées, chiffrées pour prévenir des éventuelles sources de piratage.
+
+Attention ! Lorsqu'on crée plusieurs jobs, il peut être important de spécifié un ordre d'exécution.
+Pour cela il faut insérer ``needs: nom_du_job`` pour dire que le job actuel à besoin que le job "nom_du_job" ait fini d'exécuter.
+
+Nous avons besoin de "push" nos images docker à la fin d'une pipeline pour garder une version ayant passé tous les tests dans notre environnement Docker Hub et pour ainsi garder des images propres et fonctionnelles quelque part.
+
+## Ansible
+
+Voici les commandes de base d'Ansible utilisée dans ce projet :
+```
+# L'option all permet d'exécuter toutes les tâches et commandes spécifiées dans un inventaire Ansible
+ansible all
+
+# L'option -i permet de spécifier le fichier d'inventaire Ansible
+ansible -i inventories/mon-inventaire.yml
+
+# L'option -m permet de spécifier un module à exécuter tandis que l'option -a permet de donner des arguments à la commande.
+ansible -m commande -a "ls -l"
+
+# L'option --become permet de spécifier à Ansible que la commande doit être utilisée en tant que super administrateur (root)
+ansible all -m command -a "reboot" --become
+```
+
+## Conclusion
+
+Je me suis arrêté au playbooks. J'ai réussi à déployer mon application grâce à Ansible mais je n'ai pas réussi à faire fonctionner mon application. 😔

@@ -23,7 +23,7 @@ jobs:
           distribution: 'oracle'
           java-version: 17
 
-     # finally build your app with the latest command
+     # finaly build your app with the latest command
       - name: Build and test with Maven
-        # to build my app
+        # to build my app and use SonarCloud analysis while testing
         run: mvn --file ./backend/simple-api-student/pom.xml -B verify sonar:sonar -Dsonar.projectKey=devops-li_tp -Dsonar.organization=devops-li -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}

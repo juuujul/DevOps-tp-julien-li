@@ -1,6 +1,3 @@
----
-# tasks file for roles/database
-
 # Task to run the database
 - name: Run DATABASE
   # Actions for the database container
@@ -14,11 +11,11 @@
     pull: true
     # The network
     networks:
-      - name: app-network
+      - name: my_network
     # My environment variables
     env:
       POSTGRES_DB: db
       POSTGRES_USER: usr
       POSTGRES_PASSWORD: pwd
     # The volumes
-    volumes: data_bis:/var/lib/postgresql/data
+    volumes: /my/own/datadir:/var/lib/postgresql/data

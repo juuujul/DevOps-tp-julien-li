@@ -1,19 +1,30 @@
 - hosts: all
   gather_facts: false
   become: yes
+  # Liste de tous les rôles à exécuter
   roles:
+    # Le rôle docker
     - role: docker
+      # On spécifie que le rôle docker utilise du python
       vars:
         ansible_python_interpreter: /usr/bin/python
+    # Le rôle network
     - role: network
       vars:
+        # On spécifie que le rôle network utilise du python3
         ansible_python_interpreter: /usr/bin/python3
+    # Le rôle database
     - role: database
       vars:
+        # On spécifie que le rôle database utilise du python3
         ansible_python_interpreter: /usr/bin/python3
+    # Le rôle httpserver
     - role: httpserver
       vars:
+        # On spécifie que le rôle httpserver utilise du python3
         ansible_python_interpreter: /usr/bin/python3
+    # Le rôle backend
     - role: backend
       vars:
+        # On spécifie que le rôle backend utilise du python3
         ansible_python_interpreter: /usr/bin/python3

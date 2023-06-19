@@ -1,15 +1,12 @@
----
-# tasks file for roles/httpserver
-
 # Task to run the proxy
-- name: Run proxy
+- name: Run HTTPD
   docker_container:
     # The name of the container
     name: httpserver
     # The image in my docker hub
-    image: juuuju/takima_http_server
+    image: juuuju/takima_http_server:latest
     # My network
-    network_mode: app-network
+    network_mode: my_network
     # The port
     ports:
       - 80:80
